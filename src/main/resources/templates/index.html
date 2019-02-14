@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+
+<title>Lista de Eventos</title>
+</head>
+<body>
+	<div class="container">
+		<h1>Lista Eventos</h1>
+
+		<a href="/evento" class="waves-effect waves-light btn"><i class="material-icons right">add_circle_outline</i>Crear Evento</a>
+		<table>
+            <thead>
+                <th>Nombre</th>
+                <th>Local</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </thead>
+            <tbody>
+                    <tr th:each=" evento: ${listaEventos}">
+                            <td><a th:href="${(#mvc.url('EC#detalleEvento').arg(0, evento.id)).build()}">
+                                <span th:text="${evento.nombre}"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <span th:text="${evento.local}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${evento.fecha}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${evento.horario}"></span>
+                            </td>
+                        
+                    </tr>
+            </tbody>
+        </table>
+	</div>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

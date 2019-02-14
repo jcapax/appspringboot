@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+
+<title>Evento App</title>
+</head>
+<body>
+	<div class="container">
+		<h1>Catalogo de Eventos</h1>
+		<a href="/listaeventos" class="waves-effect waves-light btn"><i
+			class="material-icons right">apps</i>Lista Eventos</a>
+		<form action="" method="post">
+			<br> nombre: <input type="text" value="" name="nombre">
+			<div class="row">
+				<div class="input-field col s6">
+					local: <input type="text" value="" name="local">
+				</div>
+				<div class="input-field col s3">
+					fecha: <input type="date" value="" name="fecha">
+				</div>
+				<div class="input-field col s3">
+					hora: <input type="text" value="" name="horario">
+				</div>
+			</div>
+
+			<button type="submit">Guardar</button>
+		</form>
+	</div>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>
