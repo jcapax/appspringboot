@@ -40,7 +40,7 @@ public class EventoController {
 		return model;
 	}
 	
-	@RequestMapping("/{id}")
+	@RequestMapping("/detalleEvento/{id}")
 	public ModelAndView detalleEvento(@PathVariable("id") long id) {
 		
 		ModelAndView model = new ModelAndView("evento/detalleEvento");
@@ -50,5 +50,18 @@ public class EventoController {
 		
 		return model;
 	}
+	
+	@RequestMapping(value="/deleteEvento/{id}", method=RequestMethod.GET)
+	public ModelAndView deleteEvento(@PathVariable("id") long id) {
+		Evento evento = er.findById(id);
+		er.delete(evento);
+		ModelAndView model = new ModelAndView("index");
+		Iterable<Evento> listaEventos = er.findAll();
+		model.addObject("listaEventos", listaEventos);
+		
+		return model;
+	}
+	
+	
 
 }
