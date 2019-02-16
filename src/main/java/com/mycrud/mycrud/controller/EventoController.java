@@ -1,7 +1,5 @@
 package com.mycrud.mycrud.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +38,7 @@ public class EventoController {
 		return model;
 	}
 	
-	@RequestMapping("/detalleEvento/{id}")
+	@RequestMapping("/{id}")
 	public ModelAndView detalleEvento(@PathVariable("id") long id) {
 		
 		ModelAndView model = new ModelAndView("evento/detalleEvento");
@@ -52,14 +50,11 @@ public class EventoController {
 	}
 	
 	@RequestMapping(value="/deleteEvento/{id}", method=RequestMethod.GET)
-	public ModelAndView deleteEvento(@PathVariable("id") long id) {
+	public String deleteEvento(@PathVariable("id") long id) {
 		Evento evento = er.findById(id);
 		er.delete(evento);
-		ModelAndView model = new ModelAndView("index");
-		Iterable<Evento> listaEventos = er.findAll();
-		model.addObject("listaEventos", listaEventos);
 		
-		return model;
+		return "redirect:/listaeventos";
 	}
 	
 	
