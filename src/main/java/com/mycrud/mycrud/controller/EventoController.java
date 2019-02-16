@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycrud.mycrud.models.Evento;
+import com.mycrud.mycrud.models.Invitado;
 import com.mycrud.mycrud.repository.EventoRepository;
+import com.mycrud.mycrud.repository.InvitadoRepository;
 
 @Controller
 public class EventoController {
 	
 	@Autowired
 	private EventoRepository er;
+
+	@Autowired
+	private InvitadoRepository ir;
 	
 	@RequestMapping(value="/evento", method=RequestMethod.GET)
 	public String Form() {
@@ -38,7 +43,7 @@ public class EventoController {
 		return model;
 	}
 	
-	@RequestMapping("/{id}")
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ModelAndView detalleEvento(@PathVariable("id") long id) {
 		
 		ModelAndView model = new ModelAndView("evento/detalleEvento");
@@ -46,7 +51,19 @@ public class EventoController {
 		Evento evento = er.findById(id);
 		model.addObject("evento", evento);
 		
+		Iterable<Invitado> invitados = ir.findByEvento(evento);
+		model.addObject("invitados", invitados);
+		
 		return model;
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.POST)
+	public String detalleEventoPost(@PathVariable("id") long id, Invitado invitado) {
+		
+		Evento evento = er.findById(id);
+		invitado.setEvento(evento);
+		ir.save(invitado);
+		return "redirect:/{id}";
 	}
 	
 	@RequestMapping(value="/deleteEvento/{id}", method=RequestMethod.GET)
