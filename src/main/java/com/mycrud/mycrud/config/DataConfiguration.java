@@ -16,7 +16,7 @@ public class DataConfiguration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-		dataSource.setUrl("jdbc:mariadb://localhost/demo");
+		dataSource.setUrl("jdbc:mariadb://localhost/app_crud");
 		dataSource.setUsername("root");
 		dataSource.setPassword("mariaroot");
 		

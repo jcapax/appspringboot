@@ -26,8 +26,35 @@
             <p>local: <span th:text="${evento.local}"></span></p>
             <p>fecha: <span th:text="${evento.fecha}"></span></p>
             <p>hora: <span th:text="${evento.horario}"></span></p>
-        </div>
-	</div>
+		</div>
+		<form action="" method="post">
+			RG: <input type="text" value="" name="rg"/>
+			Nombre Invitado: <input type="text" value="" name="nombreInvitado"/>
+			<input type="submit" value="adicionar" class="waves-effect waves-light btn">
+		</form>
+		<div class="row">	
+			<table>
+				<thead>
+					<div class="input-field col s2">
+						<th>RG</th>
+					</div>
+					<div>
+						<th class="input-field col s6">Nombre Invitado</th>
+					</div>
+				</thead>
+				<tbody>
+					<tr th:each="invitado : ${invitados}">
+						<div class="input-field col s2">
+							<td><span th:text="${invitado.rg}"></span></td>
+						</div>
+						<div class="input-field col s6">
+							<td><span th:text="${invitado.nombreInvitado}"></span></td>
+						</div>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>	
 	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
 </html>
