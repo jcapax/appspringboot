@@ -18,7 +18,7 @@ public class DataConfiguration {
 		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
 		dataSource.setUrl("jdbc:mariadb://localhost/demo");
 		dataSource.setUsername("root");
-		dataSource.setPassword("mysqlroot");
+		dataSource.setPassword("mariaroot");
 		
 		return dataSource;
 	}
