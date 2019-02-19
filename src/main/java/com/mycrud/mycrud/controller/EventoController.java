@@ -1,11 +1,15 @@
 package com.mycrud.mycrud.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mycrud.mycrud.models.Evento;
 import com.mycrud.mycrud.models.Invitado;
@@ -58,11 +62,20 @@ public class EventoController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
-	public String detalleEventoPost(@PathVariable("id") long id, Invitado invitado) {
+	public String detalleEventoPost(@PathVariable("id") long id, 
+			@Valid Invitado invitado, 
+			BindingResult result,
+			RedirectAttributes attributes) {
+		
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("mensaje", "Verificar los campos!!!");
+			return "redirect:/{id}";
+		}
 		
 		Evento evento = er.findById(id);
 		invitado.setEvento(evento);
 		ir.save(invitado);
+		attributes.addFlashAttribute("mensaje", "Invitado registrado con exito!!!");
 		return "redirect:/{id}";
 	}
 	

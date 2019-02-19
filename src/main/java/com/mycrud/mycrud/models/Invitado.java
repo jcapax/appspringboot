@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Invitado implements Serializable{
@@ -17,7 +18,9 @@ public class Invitado implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@NotEmpty
 	private String rg;
+	@NotEmpty
 	private String nombreInvitado;
 	
 	@ManyToOne
