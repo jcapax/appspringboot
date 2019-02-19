@@ -16,11 +16,21 @@
 <title>Detalle Evento</title>
 </head>
 <body>
-	<div class="container">
-		<h1>Detalle Evento</h1>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo">Detalle Evento</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li>
+					<a href="/listaeventos" class="waves-effect waves-light btn"><i class="material-icons right">apps</i>Lista Eventos</a>
+			</li>
+			</ul>
+		</div>
+	</nav>
 
-		<a href="/listaeventos" class="waves-effect waves-light btn"><i class="material-icons right">apps</i>Lista Eventos</a>
-        
+	
+	
+	<div class="container">
+		
         <div class="row">
             <p>nombre: <span th:text="${evento.nombre}"></span></p>
             <p>local: <span th:text="${evento.local}"></span></p>

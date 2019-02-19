@@ -31,8 +31,13 @@ public class EventoController {
 	}
 	
 	@RequestMapping(value="/evento", method=RequestMethod.POST)
-	public String Form(Evento evento) {
+	public String Form(@Valid Evento evento, BindingResult result, RedirectAttributes attributes) {
 		
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("mensaje", "Completar todos los campos!!!");
+			return "redirect:/evento";
+		}
+		attributes.addFlashAttribute("mensaje", "evento registrado con exito!!!");
 		er.save(evento);
 		return "redirect:/evento";
 	}

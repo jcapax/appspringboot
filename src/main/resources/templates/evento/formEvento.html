@@ -15,9 +15,19 @@
 <title>Evento App</title>
 </head>
 <body>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo">Catalogo de Eventos</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li>
+					<a href="/listaeventos" class="waves-effect waves-light btn"><i class="material-icons right">apps</i>Lista Eventos</a>
+			</li>
+			</ul>
+		</div>
+	</nav>
+		
 	<div class="container">
-		<h1>Catalogo de Eventos</h1>
-		<a href="/listaeventos" class="waves-effect waves-light btn"><i class="material-icons right">apps</i>Lista Eventos</a>
+		<th:block th:include="mensajeValidacion"></th:block>
 		<form action="" method="post">
 			<br>
 			nombre: <input type="text" value="" name="nombre">
