@@ -35,6 +35,7 @@
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th></th>
+                <th></th>
             </thead>
             <tbody>
                     <tr th:each=" evento: ${listaEventos}">
@@ -50,6 +51,11 @@
                             </td>
                             <td>
                                 <span th:text="${evento.horario}"></span>
+                            </td>
+                            <td>
+                                <a th:href="${(#mvc.url('EC#editarEvento').arg(0, evento.id)).build()}">
+                                <i class="material-icons">edit</i>
+                                </a>
                             </td>
                             <td>
                                 <a th:href="${(#mvc.url('EC#deleteEvento').arg(0, evento.id)).build()}">

@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,6 +67,17 @@ public class EventoController {
 		return model;
 	}
 	
+	
+	@RequestMapping(value="/editarEvento/{id}", method=RequestMethod.GET)
+	public ModelAndView editarEvento(@PathVariable("id") long id) {
+		ModelAndView model = new ModelAndView("evento/editEvento");
+		
+		Evento evento = er.findById(id);
+		model.addObject("evento", evento);
+		
+		return model;
+	}
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
 	public String detalleEventoPost(@PathVariable("id") long id, 
 			@Valid Invitado invitado, 
@@ -84,6 +96,17 @@ public class EventoController {
 		return "redirect:/{id}";
 	}
 	
+	@RequestMapping(value="/editarEvento/{id}", method=RequestMethod.POST)
+	public String editEventoPost(@Valid Evento evento, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("mensaje", "Verificar los campos!!!");
+			return "redirect:/editarEvento/{id}";
+		}
+		er.save(evento);
+		attributes.addFlashAttribute("mensaje", "Evento modificado con exito!!!");
+		return "redirect:/editarEvento/{id}";
+	}
+	
 	@RequestMapping(value="/deleteEvento/{id}", method=RequestMethod.GET)
 	public String deleteEvento(@PathVariable("id") long id) {
 		Evento evento = er.findById(id);
@@ -92,6 +115,14 @@ public class EventoController {
 		return "redirect:/listaeventos";
 	}
 	
-	
+	@RequestMapping(value="/deleteInvitado/{id}", method=RequestMethod.GET)
+	public String deleteInvitado(@PathVariable("id") long id) {
+		Invitado invitado = ir.findById(id);
+		Evento evento = invitado.getEvento();
+		
+		ir.delete(invitado);
+		
+		return "redirect:/"+evento.getId();
+	}
 
 }
